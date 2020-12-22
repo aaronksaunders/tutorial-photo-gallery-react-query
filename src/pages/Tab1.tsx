@@ -5,7 +5,6 @@ import {
   IonPage,
   IonTitle,
   IonToolbar,
-  IonLabel,
   IonLoading,
   IonCol,
   IonGrid,
@@ -14,28 +13,29 @@ import {
   IonFab,
   IonFabButton,
   IonIcon,
+  IonButton,
 } from "@ionic/react";
 import "./Tab1.css";
-import { useMutation, useQuery, useQueryClient } from "react-query";
-import API from "../firebase-service";
 import { CameraResultType, CameraSource, CameraPhoto } from "@capacitor/core";
 import { useCamera } from "@ionic/react-hooks/camera/useCamera";
 import { camera } from "ionicons/icons";
 import { decode } from "base64-arraybuffer";
+import { useHistory } from "react-router";
+import { usePhotos, useDeletePhoto, useAddPhoto } from "../hooks/usePhotoQueries";
+import { ErrorDisplay } from "../components/ErrorDisplay";
 
 const Tab1: React.FC = () => {
   const { isLoading, data, error } = usePhotos();
+  const history = useHistory();
 
   const {
     isLoading: delLoading,
-    // data: addData,
     error: delError,
     mutate: deletePhotoMutation,
   } = useDeletePhoto();
 
   const {
     isLoading: addLoading,
-    // data: addData,
     error: addError,
     mutate: addPhotoMutation,
   } = useAddPhoto();
@@ -113,6 +113,13 @@ const Tab1: React.FC = () => {
                       })
                     }
                   />
+                  <IonButton
+                    size="small"
+                    expand="block"
+                    onClick={() => history.push(`/tab1/details/${photo.id}`)}
+                  >
+                    DETAILS
+                  </IonButton>
                 </IonCol>
               ))}
             </IonRow>
@@ -126,51 +133,6 @@ const Tab1: React.FC = () => {
         </IonContent>
       </IonContent>
     </IonPage>
-  );
-};
-
-const ErrorDisplay: React.FC<{ error: any }> = ({ error }) => {
-  if (!error) return null;
-  return (
-    <div className="ion-padding">
-      <IonLabel>{(error as any)?.message}</IonLabel>
-    </div>
-  );
-};
-const usePhotos = () => {
-  return useQuery("photos", async () => {
-    console.log("in query");
-    return await API.loadPhotos();
-  });
-};
-
-const useAddPhoto = () => {
-  const client = useQueryClient();
-  return useMutation(
-    async (data: any) => {
-      console.info("addPhoto", data);
-      return await API.savePhoto(data, null);
-    },
-    {
-      onSuccess: () => {
-        client.invalidateQueries("photos");
-      },
-    }
-  );
-};
-
-const useDeletePhoto = () => {
-  const client = useQueryClient();
-  return useMutation(
-    async ({ id, path }: { id: string; path: string }) => {
-      console.info("deletePhoto", id, path);
-      return await API.deletePhoto(id, path);
-    },
-    {
-      onSuccess: () => {
-        client.invalidateQueries("photos");
-      },
-    }
   );
 };
 

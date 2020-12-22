@@ -139,7 +139,12 @@ const API = () => {
     // functions
     deletePhoto,
     savePhoto,
+    loadPhoto: async (id: string) => {
+      console.log("firebase loadPhoto");
+      return await getCollectionDoc(photoCollection, id);
+    },
     loadPhotos: async () => {
+      console.log("firebase loadPhotos");
       return await getCollectionData(photoCollection);
     },
   };
