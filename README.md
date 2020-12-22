@@ -1,8 +1,9 @@
 
 <p align="center">
-  <img src="Screen Shot 2020-12-14 at 12.34.22 AM.png"  height="450" /><br />
+  <img src="ionic-firebase-reactquery-photos.png"  height="450" /><br />
 </p>
 <br/>
+
 # Build Your First Ionic App: Photo Gallery (Ionic React and Capacitor) with ReactQuery & Firebase
 
 Get started with Ionic by building a photo gallery app that runs on iOS, Android, and the web - with just one codebase. This is the complete project referenced in the ["Your First App: React" guide](https://ionicframework.com/docs/react/your-first-app). Follow along to create a complete CRUD (create-read-update-delete) experience.
