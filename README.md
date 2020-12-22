@@ -3,6 +3,7 @@
   <img src="ionic-firebase-reactquery-photos.png"  width="80%" /><br />
 </p>
 <br/>
+LINK TO VIDEO: https://www.youtube.com/watch?v=K0KNOqFxio0
 
 # Build Your First Ionic App: Photo Gallery (Ionic React and Capacitor) with ReactQuery & Firebase
 
