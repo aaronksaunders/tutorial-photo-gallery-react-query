@@ -1,6 +1,6 @@
 
 <p align="center">
-  <img src="ionic-firebase-reactquery-photos.png"  height="450" /><br />
+  <img src="ionic-firebase-reactquery-photos.png"  width="80%" /><br />
 </p>
 <br/>
 
